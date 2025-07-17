@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 
 const tracker = new Tracker({
   projectKey: "qZVlWIGr1HKr3X6u19A2",
-  // __DISABLE_SECURE_MODE: true,
+  // __DISABLE_SECURE_MODE: true, // open when local
   ingestPoint: "https://openreplay.sheepslow.life/ingest",
 });
 
@@ -19,15 +19,24 @@ export default function Openreplay() {
       const uuid = crypto.randomUUID();
       setTrackID(uuid);
       setIsTracking(true);
-      tracker.start({
-        userID: uuid,
-        sessionHash: uuid,
-      });
+      tracker.start();
+      setTimeout(() => {
+        tracker.setUserID(uuid);
+      }, 200);
       return;
     }
 
     tracker.stop();
     setIsTracking(false);
+    window.localStorage.removeItem("__openreplay_uuid");
+    const clearSSList = [
+      "__openreplay_token",
+      "__openreplay_tabid",
+      "__openreplay_pageno",
+    ];
+    clearSSList.forEach((item) => {
+      window.sessionStorage.removeItem(item);
+    });
   };
 
   const copyToClipboard = async () => {
