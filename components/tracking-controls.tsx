@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 
 const tracker = new Tracker({
   projectKey: "qZVlWIGr1HKr3X6u19A2",
-  __DISABLE_SECURE_MODE: true,
+  // __DISABLE_SECURE_MODE: true,
   ingestPoint: "https://openreplay.sheepslow.life/ingest",
 });
 
