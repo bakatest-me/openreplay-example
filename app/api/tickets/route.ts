@@ -2,6 +2,7 @@ import { type NextRequest, NextResponse } from "next/server"
 
 // In-memory storage for demo purposes
 // In a real application, you would use a database
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const tickets: any[] = [
   {
     id: "1",
@@ -62,6 +63,7 @@ export async function POST(request: NextRequest) {
     tickets.push(newTicket)
 
     return NextResponse.json(newTicket, { status: 201 })
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     return NextResponse.json({ error: "Failed to create ticket" }, { status: 500 })
   }
